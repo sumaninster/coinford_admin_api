@@ -1,0 +1,490 @@
+swagger: "2.0"
+info:
+  title: Coinford Admin API
+  description: Coinford Admin API
+  version: 1.0.0
+  termsOfService: http://coinford.com/
+  contact:
+    email: astaxie@gmail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+basePath: /v1
+paths:
+  /admin/admingroups:
+    post:
+      tags:
+      - admin
+      description: List the admin groups
+      operationId: AdminController.Delete
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminToken'
+      responses:
+        "200":
+          description: '{string} list success!'
+        "403":
+          description: uid is empty
+  /admin/auth:
+    post:
+      tags:
+      - admin
+      description: Authenticates the admin into the system
+      operationId: AdminController.Authenticate
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin_models.AdminToken'
+      responses:
+        "200":
+          description: '{string} login success'
+        "403":
+          description: admin not exist
+  /admin/changeadminname:
+    post:
+      tags:
+      - admin
+      description: change Adminname for the admin
+      operationId: AdminController.ChangeAdminname
+      parameters:
+      - in: body
+        name: body
+        description: Change Adminname
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminChangeAdminname'
+      responses:
+        "200":
+          description: '{string} password change success!'
+        "403":
+          description: password change failed
+  /admin/changename:
+    post:
+      tags:
+      - admin
+      description: change name for the admin (allowed only once). Please make sure
+        this matches your bank account. You will not be able to change the name a
+        second time.
+      operationId: AdminController.ChangeName
+      parameters:
+      - in: body
+        name: body
+        description: Change Name
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminChangeName'
+      responses:
+        "200":
+          description: '{string} password change success!'
+        "403":
+          description: password change failed
+  /admin/delete:
+    delete:
+      tags:
+      - admin
+      description: delete the admin
+      operationId: AdminController.Delete
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminId'
+      responses:
+        "200":
+          description: '{string} delete success!'
+        "403":
+          description: uid is empty
+  /admin/isuniqueadminname:
+    post:
+      tags:
+      - admin
+      description: Logs out current logged in admin session
+      operationId: AdminController.IsUniqueAdminname
+      parameters:
+      - in: body
+        name: body
+        description: Adminname for uniqueness
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminAdminname'
+      responses:
+        "200":
+          description: '{string} unique adminname'
+  /admin/login:
+    post:
+      tags:
+      - admin
+      description: Logs admin into the system
+      operationId: AdminController.Login
+      parameters:
+      - in: body
+        name: body
+        description: Login Details
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminLogin'
+      responses:
+        "200":
+          description: '{string} login success'
+        "403":
+          description: admin not exist
+  /admin/logout:
+    post:
+      tags:
+      - admin
+      description: Logs out current logged in admin session
+      operationId: AdminController.logout
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminToken'
+      responses:
+        "200":
+          description: '{string} logout success'
+  /admin/register:
+    post:
+      tags:
+      - admin
+      description: Register New Admin
+      operationId: AdminController.RegisterAdmin
+      parameters:
+      - in: body
+        name: body
+        description: New Admin Registration Data
+        required: true
+        schema:
+          $ref: '#/definitions/admin.AdminAdd'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: body is empty
+  /admin/token:
+    get:
+      tags:
+      - admin
+      description: Issue a new token
+      operationId: AdminController.IssueToken
+      responses:
+        "200":
+          description: '{admin} admin_models.Admin'
+        "403":
+          description: :uid is empty
+  /country/add:
+    post:
+      tags:
+      - country
+      description: get the list of countries
+      operationId: CountryController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.CountryAdd'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+  /country/list:
+    post:
+      tags:
+      - country
+      description: get the list of countries
+      operationId: CountryController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin_models.AdminToken'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+  /country/update:
+    post:
+      tags:
+      - country
+      description: get the list of countries
+      operationId: CountryController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.CountryUpdate'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+  /currency/add:
+    post:
+      tags:
+      - currency
+      description: get the list of currencies
+      operationId: CurrencyController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.CurrencyAdd'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+  /currency/list:
+    post:
+      tags:
+      - currency
+      description: get the list of currencies
+      operationId: CurrencyController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin_models.AdminToken'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+  /currency/update:
+    post:
+      tags:
+      - currency
+      description: get the list of currencies
+      operationId: CurrencyController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.CurrencyUpdate'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+  /user/list:
+    post:
+      tags:
+      - user
+      description: get the list of users
+      operationId: UserController.GetAll
+      parameters:
+      - in: body
+        name: body
+        description: Token for Authentication
+        required: true
+        schema:
+          $ref: '#/definitions/admin.UserGet'
+      responses:
+        "200":
+          description: '{int} response'
+        "403":
+          description: Authentication Failed
+definitions:
+  admin.AdminAdd:
+    title: AdminAdd
+    type: object
+    properties:
+      AdminGroupId:
+        type: integer
+        format: int64
+      Adminname:
+        type: string
+      Email:
+        type: string
+      Name:
+        type: string
+      Password:
+        type: string
+      Token:
+        type: string
+  admin.AdminAdminname:
+    title: AdminAdminname
+    type: object
+    properties:
+      Adminname:
+        type: string
+      Token:
+        type: string
+  admin.AdminChangeAdminname:
+    title: AdminChangeAdminname
+    type: object
+    properties:
+      CurrentPassword:
+        type: string
+      NewAdminname:
+        type: string
+      Token:
+        type: string
+  admin.AdminChangeName:
+    title: AdminChangeName
+    type: object
+    properties:
+      CurrentPassword:
+        type: string
+      NewName:
+        type: string
+      Token:
+        type: string
+  admin.AdminId:
+    title: AdminId
+    type: object
+    properties:
+      Id:
+        type: integer
+        format: int64
+      Token:
+        type: string
+  admin.AdminLogin:
+    title: AdminLogin
+    type: object
+    properties:
+      Adminname:
+        type: string
+      Password:
+        type: string
+      Token:
+        type: string
+  admin.AdminToken:
+    title: AdminToken
+    type: object
+    properties:
+      Token:
+        type: string
+  admin.CountryAdd:
+    title: CountryAdd
+    type: object
+    properties:
+      Code:
+        type: string
+      DialCode:
+        type: string
+      IsoCode:
+        type: string
+      Name:
+        type: string
+      Token:
+        type: string
+  admin.CountryUpdate:
+    title: CountryUpdate
+    type: object
+    properties:
+      Code:
+        type: string
+      DialCode:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      IsoCode:
+        type: string
+      Name:
+        type: string
+      Token:
+        type: string
+  admin.CurrencyAdd:
+    title: CurrencyAdd
+    type: object
+    properties:
+      Code:
+        type: string
+      CountryId:
+        type: integer
+        format: int64
+      Description:
+        type: string
+      Name:
+        type: string
+      Token:
+        type: string
+      Type:
+        type: string
+  admin.CurrencyUpdate:
+    title: CurrencyUpdate
+    type: object
+    properties:
+      Code:
+        type: string
+      CountryId:
+        type: integer
+        format: int64
+      Description:
+        type: string
+      Id:
+        type: integer
+        format: int64
+      Name:
+        type: string
+      Token:
+        type: string
+      Type:
+        type: string
+  admin.UserGet:
+    title: UserGet
+    type: object
+    properties:
+      Token:
+        type: string
+      UserSearch:
+        $ref: '#/definitions/admin.UserSearch'
+  admin.UserSearch:
+    title: UserSearch
+    type: object
+    properties:
+      CountryId:
+        type: integer
+        format: int64
+      Eligible:
+        type: string
+  admin_models.AdminToken:
+    title: AdminToken
+    type: object
+    properties:
+      AdminId:
+        type: integer
+        format: int64
+      CreatedAt:
+        type: string
+        format: string
+      DeletedAt:
+        type: string
+        format: string
+      ExpirationTime:
+        type: string
+        format: string
+      Id:
+        type: integer
+        format: int64
+      Token:
+        type: string
+      UpdatedAt:
+        type: string
+        format: string
